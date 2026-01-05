@@ -1,9 +1,6 @@
 import Razorpay from "razorpay";
 
-/**
- * Create a Razorpay instance at runtime
- * (after env vars are loaded)
- */
+
 const getRazorpayInstance = () => {
   if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
     throw new Error("Razorpay keys not found in environment variables");
@@ -19,7 +16,7 @@ export const createOrder = async (amount) => {
   const razorpay = getRazorpayInstance();
 
   const options = {
-    amount: amount * 100, // paise
+    amount: amount * 100, 
     currency: "INR",
     receipt: `receipt_${Date.now()}`,
   };

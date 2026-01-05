@@ -48,13 +48,11 @@ export default function App() {
 
   return (
     <div className="app">
-      {/* CENTER HEADER */}
       <header className="hero-header">
         <h1 className="netflix-logo">NETFLIX</h1>
         <h2 className="hero-subtitle">Subscription Plans</h2>
       </header>
 
-      {/* BILLING */}
       <div className="billing-toggle">
         <button
           className={billing === "monthly" ? "active" : ""}
@@ -70,7 +68,6 @@ export default function App() {
         </button>
       </div>
 
-      {/* PLANS */}
       <div className="plans">
         {plans.map((plan) => (
           <PlanCard

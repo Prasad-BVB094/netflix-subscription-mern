@@ -13,7 +13,6 @@ export default function SubscribeModal({ plan, onClose, onResult }) {
     try {
       setLoading(true);
 
-      // 1️⃣ Create Razorpay order from backend
       const { data } = await api.createOrder({
         name: name.trim(),
         plan: plan.name,
@@ -30,7 +29,6 @@ export default function SubscribeModal({ plan, onClose, onResult }) {
         order_id: data.orderId,
 
         handler: async function (response) {
-          // 2️⃣ Verify payment
           const verifyRes = await api.verifyPayment({
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
