@@ -9,6 +9,16 @@ export const createSubscriptionOrder = async (req, res) => {
     return res.status(400).json({ message: "Invalid input" });
   }
 
+  const existingUser = await Subscription.findOne({
+    name: name.trim()
+  });
+
+  if (existingUser) {
+    return res.status(409).json({
+      message: "Subscription already exists for this name"
+    });
+  }
+
   const order = await createOrder(amount);
 
   res.json({
@@ -18,6 +28,7 @@ export const createSubscriptionOrder = async (req, res) => {
     key: process.env.RAZORPAY_KEY_ID
   });
 };
+
 
 export const verifyPayment = async (req, res) => {
   const {

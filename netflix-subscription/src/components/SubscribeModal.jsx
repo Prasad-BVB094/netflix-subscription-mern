@@ -57,8 +57,12 @@ export default function SubscribeModal({ plan, onClose, onResult }) {
       const razorpay = new window.Razorpay(options);
       razorpay.open();
     } catch (err) {
-      onClose();
-      onResult("failure");
+      if (err.response?.status === 409) {
+        alert("Subscription already exists for this name");
+      } else {
+        alert("Payment failed. Please try again.");
+      }
+        onClose();
     } finally {
       setLoading(false);
     }
